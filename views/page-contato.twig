@@ -1,0 +1,126 @@
+{% extends 'base.twig' %}
+
+{% block conteudo %}
+	<section class="Banner _contato">
+		<div class="item wow fadeIn" style="background-image: url({{ Image(post.get_field('imagem')) }});"></div>
+	</section>
+
+	<section class="Page _contato">
+		<div class="container">
+			<div class="content">
+				<div class="Row _gutters wow fadeIn">
+					<div class="col _col-6">
+						<p class="titulo">#{% if fn('get_locale') == 'pt_BR' %}CONTATO{% elseif fn('get_locale') == 'es_ES' %}CONTACTO{% else %}CONTACT{% endif %}</p>
+						<h2 class="subtitulo">
+							{% if fn('get_locale') == 'pt_BR' %}
+								Olá! Essa é página para contato com a imoveis. Preencha o formulário ao lado que logo entraremos em contato.
+							{% elseif fn('get_locale') == 'es_ES' %}
+								¡Hola! Esta es la página de contacto de imoveis. Complete el formulario al costado y en breve nos pondremos en contacto con usted.
+							{% else %}
+								Hello! This is the contact page for imoveis. Fill in the form on the side and we will contact you shortly.
+							{% endif %}
+						</h2>
+						
+						<div class="infos">
+							<div class="infos1">
+								<div class="item">
+									<i class="icon-local"></i>
+									<span>{{ option('endereco') }}</span>
+								</div>
+							</div>
+							<div class="infos2">
+								<div class="item">
+									<i class="icon-tel"></i>
+									<span>
+										{% for item in option('telefones') %}
+										<a href="tel:{{ item.telefone }}">{{ item.telefone }}</a>
+										{% endfor %}
+									</span>
+								</div>
+								<div class="item">
+									<i class="icon-email"></i>
+									<span>
+										E-mails: 
+										{% for item in option('emails') %}
+										<a href="mailto:{{ item.email }}">{{ item.email }}</a>
+										{% endfor %}
+									</span>
+								</div>
+							</div>
+						</div>	
+					</div>
+					<div class="col _col-6">
+						<form action="" id="form" method="post" class="Form">
+							<div class="form-item">
+								<label>{% if fn('get_locale') == 'pt_BR' %}Nome{% elseif fn('get_locale') == 'es_ES' %}Nombre{% else %}Name{% endif %} <span class="text-danger">*</span></label>
+								<div>
+									<input id="nome" name="nome" value="" required="required" placeholder="Nome" type="text">
+								</div>
+							</div>
+							<div class="form-item">
+								<label>E-mail <span class="text-danger">*</span></label>
+								<div>
+									<input id="email" name="email" value="" type="email" required="required" placeholder="E-mail">
+								</div>
+							</div>
+							<div class="form-item">
+								<label>{% if fn('get_locale') == 'pt_BR' %}Telefone{% elseif fn('get_locale') == 'es_ES' %}Teléfono{% else %}Phone{% endif %} <span class="text-danger">*</span></label>
+								<div>
+									<input id="telefone" name="telefone" value="" required="required" placeholder="Whatsapp" class="telefone" type="text" maxlength="15">
+								</div>
+							</div>
+							<div class="form-item">
+								<label>{% if fn('get_locale') == 'pt_BR' %}Sobre{% elseif fn('get_locale') == 'es_ES' %}Acerca de{% else %}About{% endif %} <span class="text-danger">*</span></label>
+								<select id="sobre" name="sobre" required="required" placeholder="Sobre">
+									<option value="" selected="selected">{% if fn('get_locale') == 'pt_BR' %}Selecione a finalidade{% elseif fn('get_locale') == 'es_ES' %}seleccione el propósito{% else %}select the purpose{% endif %}</option>
+									<option value="Informações de imóveis">{% if fn('get_locale') == 'pt_BR' %}Informações de imóveis{% elseif fn('get_locale') == 'es_ES' %}informacion de bienes raices{% else %}real estate information{% endif %}</option>
+									<option value="Sugestões / reclamações">{% if fn('get_locale') == 'pt_BR' %}Sugestões / reclamações{% elseif fn('get_locale') == 'es_ES' %}Sugerencias / Quejas{% else %}Suggestions / Complaints{% endif %}</option>
+									<option value="App imoveis 24 horas">{% if fn('get_locale') == 'pt_BR' %}App imoveis 24 horas{% elseif fn('get_locale') == 'es_ES' %}aplicación imoveis 24 horas{% else %}24 hour imoveis app{% endif %}</option>
+									<option value="Locação">{% if fn('get_locale') == 'pt_BR' %}Locação{% elseif fn('get_locale') == 'es_ES' %}Ubicación{% else %}Location{% endif %}</option>
+								</select>
+							</div>
+							<div class="form-item">
+								<label>{% if fn('get_locale') == 'pt_BR' %}Assunto{% elseif fn('get_locale') == 'es_ES' %}Sujeto{% else %}Subject{% endif %} <span class="text-danger">*</span></label>
+								<div>
+									<input id="assunto" name="assunto" value="" required="required" placeholder="Assunto" type="text">
+								</div>
+							</div>
+							<div class="form-item">
+								<label>{% if fn('get_locale') == 'pt_BR' %}Mensagem{% elseif fn('get_locale') == 'es_ES' %}Mensaje{% else %}Message{% endif %} <span class="text-danger">*</span></label>
+								<div>
+									<textarea id="mensagem" name="mensagem" required="required" placeholder="Mensagem" cols="60" rows="4"></textarea>
+								</div>
+							</div>
+							<div class="form-item">
+								<button type="submit" class="Button">{% if fn('get_locale') == 'pt_BR' %}Enviar{% elseif fn('get_locale') == 'es_ES' %}Enviar{% else %}Send{% endif %}</button>
+							</div>
+							<input type="hidden" name="form_action" value="form">
+						</form>
+					</div>
+					<div class="col _col-12 wow fadeIn">
+						<h2>
+							{% if fn('get_locale') == 'pt_BR' %}
+								Na dúvida de como nos encontrar? <br>Acesse o google maps.
+							{% elseif fn('get_locale') == 'es_ES' %}
+								¿Dudas cómo encontrarnos? <br>Accede a los mapas de Google.
+							{% else %}
+								In doubt how to find us? <br>Access google maps.
+							{% endif %}
+						</h2>
+						<iframe width="1200" height="370" id="gmap_canvas" src="https://maps.google.com/maps?q={{ option('endereco')|replace({'<br />':''}) }}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="Instagram wow fadeIn">
+		<div class="container">
+			<div class="topo-home">
+				<span class="link-outline">Intagram</span>
+				<h2>{% if fn('get_locale') == 'pt_BR' %}Acesse{% elseif fn('get_locale') == 'es_ES' %}Ir a{% else %}Go to{% endif %} @imoveis.imoveis</h2>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

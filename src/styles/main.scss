@@ -1,0 +1,33 @@
+// IMPORTS
+// ---------------------------------------------------------------------------
+
+// FONTS
+@import "../../assets/fonts/fontello/css/fontello-embedded";
+
+// UTILS
+@import "variables";
+@import "libs/monalisa";
+@import "libs/animate.min";
+@import "libs/animsition.min";
+@import "libs/jquery.modal";
+@import "libs/magnific-popup";
+@import "libs/owl.carousel.min";
+
+// BASE
+@import "base";
+
+// COMPONENTS
+@import 'components/alugar';
+@import 'components/banner';
+@import 'components/imoveis24h';
+@import 'components/imoveissa';
+@import 'components/chamada';
+@import 'components/cookies';
+@import 'components/footer';
+@import 'components/form';
+@import 'components/header';
+@import 'components/instagram';
+@import 'components/lista-imoveis';
+@import 'components/noticias';
+@import 'components/page';
+@import 'components/proposta';

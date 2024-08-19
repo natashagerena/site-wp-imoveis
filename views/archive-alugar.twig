@@ -1,0 +1,161 @@
+{% extends 'base.twig' %}
+
+{% block conteudo %}
+
+	<section class="Page _alugar">
+		<div class="container">
+			<div class="Row _gutters wow fadeIn">
+				<div class="col _col-5">
+					<h2>{{ post.get_field('titulo') }}</h2>
+					<p>{{ post.get_field('texto') }}</p>
+					<br>
+					<br>
+					<h2>{{ post.get_field('titulo_2') }}</h2>
+					<p>{{ post.get_field('texto_2') }}</p>
+				</div>
+				<div class="col _col-7 form _bg" style="background-image: url({{ post.get_field('banner') }});">
+					<form action="" class="Form _card" id="alugar">
+						<div class="form-item">
+							<label>{% if fn('get_locale') == 'pt_BR' %}CIDADE{% elseif fn('get_locale') == 'es_ES' %}CIUDAD{% else %}CITY{% endif %}</label>
+							<div>
+								<select name="cidade">
+									<option value="">{% if fn('get_locale') == 'pt_BR' %}Selecione{% elseif fn('get_locale') == 'es_ES' %}Seleccione{% else %}Select{% endif %}...</option>
+									{% for cidade in cidades %}
+										<option value="{{ cidade.id }}" {{ get.cidade == cidade.id ? 'selected' : '' }}>{{ cidade.name }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="form-item">
+							<label>{% if fn('get_locale') == 'pt_BR' %}TIPO DE IMÓVEL{% elseif fn('get_locale') == 'es_ES' %}TIPO DE PROPIEDAD{% else %}PROPERTY TYPE{% endif %}</label>
+							<div>
+								<select name="tipo">
+									<option value="">{% if fn('get_locale') == 'pt_BR' %}Selecione{% elseif fn('get_locale') == 'es_ES' %}Seleccione{% else %}Select{% endif %}...</option>
+									{% for tipo in tipos %}
+										<option value="{{ tipo.id }}" {{ get.tipo == tipo.id ? 'selected' : '' }}>{{ tipo.name }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="form-item _w-custom _i1">
+							<label>{% if fn('get_locale') == 'pt_BR' %}DORMITÓRIOS{% elseif fn('get_locale') == 'es_ES' %}HABITACIONES{% else %}BEDROOMS{% endif %}</label>
+							<div><input type="number" step="1" min="0" name="dormitorios" value="{{ get.dormitorios }}" placeholder="0"></div>
+						</div>
+						<div class="form-item _w-custom">
+							<label>{% if fn('get_locale') == 'pt_BR' %}ALUGUEL ATÉ{% elseif fn('get_locale') == 'es_ES' %}ALQUILER HASTA{% else %}RENT UP TO{% endif %}</label>
+							<div><input type="text" name="aluguel" value="{{ get.aluguel }}" placeholder="R$"></div>
+						</div>
+						<div class="form-item">
+							<label>{% if fn('get_locale') == 'pt_BR' %}FINALIDADE{% elseif fn('get_locale') == 'es_ES' %}META{% else %}GOAL{% endif %}</label>
+							<div>
+								<select name="finalidade">
+									<option value="">{% if fn('get_locale') == 'pt_BR' %}Selecione{% elseif fn('get_locale') == 'es_ES' %}Seleccione{% else %}Select{% endif %}...</option>
+									{% for finalidade in finalidades %}
+										<option value="{{ finalidade.id }}" {{ get.finalidade == finalidade.id ? 'selected' : '' }}>{{ finalidade.name }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="form-item">
+							<label>{% if fn('get_locale') == 'pt_BR' %}POR CÓDIGO{% elseif fn('get_locale') == 'es_ES' %}POR CÓDIGO{% else %}BY CODE{% endif %}</label>
+							<div><input type="text" name="codigo" value="{{ get.codigo }}" placeholder="Ex. 10000659"></div>
+						</div>
+						<div class="form-item _tac">
+							<button class="Button">{% if fn('get_locale') == 'pt_BR' %}Buscar{% elseif fn('get_locale') == 'es_ES' %}Buscar{% else %}Search{% endif %}</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="chamadaApp">
+				<h2>{{ post.get_field('titulo_chamada') }}</h2>
+				<p>{{ post.get_field('texto_chamada') }}</p>
+
+				<a href="{{site.url}}/imoveis24h/#chamadaApp" class="Button">{% if fn('get_locale') == 'pt_BR' %}Saber mais{% elseif fn('get_locale') == 'es_ES' %}Saber más{% else %}Know more{% endif %}</a>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="Lista-imoveis _mb60">
+		<div class="container">
+			{% if posts %}
+				<div class="Row _gutters itens wow fadeIn" id="lista">
+					{% for item in posts %}
+						<div class="card-imovel item col _col-4">
+							<a href="{{ item.link }}">
+								<div class="imagem _bg" style="background-image: url({{ Image(item.get_field('fotos').0.foto) }});">
+									{% if item.get_field('anuncio_novo') == 'sim' %}
+										<span class="novo">{% if fn('get_locale') == 'pt_BR' %}Anúncio novo{% elseif fn('get_locale') == 'es_ES' %}Nuevo anuncio{% else %}New ad{% endif %}</span>
+									{% endif %}
+								</div>
+								<div class="infos">
+									<div class="top">
+										<span class="titulo"><i class="icon-local"></i>{{ item.title }}</span>
+										<span class="cod">{% if fn('get_locale') == 'pt_BR' %}Código{% elseif fn('get_locale') == 'es_ES' %}Código{% else %}Code{% endif %} {{ item.get_field('codigo') }}</span>
+									</div>
+									<div class="tags">
+										{% for tag in item.tags %}
+											<div class="tag">{{ tag.name }}</div>
+										{% endfor %}
+									</div>
+									<span class="link">> {% if fn('get_locale') == 'pt_BR' %}ver mais{% elseif fn('get_locale') == 'es_ES' %}ver más{% else %}view more{% endif %}</span>
+								</div>
+							</a>
+						</div>
+					{% endfor %}
+				</div>
+				<div class="_tac">
+					{% if posts.pagination.next %}
+						<a href="{{ posts.pagination.next.link }}" class="next"></a>
+					{% endif %}
+					<button class="Button trigger">{% if fn('get_locale') == 'pt_BR' %}Descubra mais Imóveis{% elseif fn('get_locale') == 'es_ES' %}Descubre más Propiedades{% else %}Discover more Properties{% endif %}</button>
+				</div>
+			{% else %}
+				<h3 class="_tac">{% if fn('get_locale') == 'pt_BR' %}Nenhum imóvel encontrado{% elseif fn('get_locale') == 'es_ES' %}No se encontró ninguna propiedad{% else %}No property found{% endif %}.</h3>
+			{% endif %}
+		</div>
+	</section>
+	
+	<section class="imoveis24h">
+		<div class="chamada">
+			<div class="container">
+				<div class="topo wow fadeIn">
+					<span class="link-outline _white _mb50">imoveis24horas</span>
+					<h2 class="titulo">{{ imoveis24.get_field('titulo_chamada') }}</h2>
+					<p>{{ imoveis24.get_field('texto_chamada') }}</p>
+				</div>
+
+				<div class="etapas wow fadeIn">
+					{% for item in imoveis24.get_field('etapas') %}
+						<div class="item">
+							<img src="{{ item.imagem }}" alt="{{ item.titulo }}">
+							<div class="texto">
+								<h3>{{ item.titulo }}</h3>
+								<p>{{ item.texto }}</p>
+							</div>
+						</div>
+					{% endfor %}
+					<div class="link wow fadeIn">
+						<a class="Button" href="{{ site.link }}/imoveis24h">{% if fn('get_locale') == 'pt_BR' %}Quero saber mais{% elseif fn('get_locale') == 'es_ES' %}Quiero saber más{% else %}Know more{% endif %}</a>
+					</div>
+				</div>
+			</div>
+			<div class="imagem" data-stellar-ratio="1.5">
+				<img src="{{ imoveis24.get_field('imagem_chamada') }}">
+				{% if imoveis24.get_field('link_youtube') %}
+				<a href="{{ imoveis24.get_field('link_youtube') }}" class="link_youtube"></a>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+
+	<section class="Propostas _page wow fadeIn">
+		<div class="imagem _bg" style="background-image: url({{ Image(home.get_field('imagem_proposta')) }});">
+			{% if home.get_field('link_youtube') %}
+			<a href="{{ home.get_field('link_youtube') }}" class="link_youtube"></a>
+			{% endif %}
+		</div>
+	</section>
+
+	
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.twig' %}
+
+{% block conteudo %}
+	<section class="Banner _contato _mb40">
+		<div class="item wow fadeIn" style="background-image: url({{ Image(post.get_field('banner')) }});"></div>
+	</section>
+
+	<section class="imoveis24h wow fadeIn">
+		<div class="topo wow fadeIn _mb60">
+			<div class="container">
+				<div class="Row _gutters">
+					<div class="col _col-6">
+						<h6 class="titulo _upper">{{ post.get_field('titulo_1') }}</h6>
+						<h2 class="subtitulo">{{ post.get_field('titulo_2') }}</h2>
+						<p>{{ post.get_field('texto') }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="" id="chamadaApp">
+			<div class="chamada wow fadeIn">
+				<div class="container">
+					<div class="topo">
+						<h2 class="titulo">{{ imoveis24.get_field('titulo_chamada') }}</h2>
+						<p>{{ imoveis24.get_field('texto_chamada') }}</p>
+					</div>
+					<div class="etapas">
+						{% for item in imoveis24.get_field('etapas') %}
+							<div class="item">
+								{% if item.link %}
+									<a class="scroll" href="{{item.link.url}}" {% if item.link.target %}target="_blank"{% endif %} data-target="{{item.link.url}}"
+									>
+								{% endif %}
+								<img src="{{ item.imagem }}" alt="{{ item.titulo }}">
+								<div class="texto">
+									<h3>{{ item.titulo }}</h3>
+									<p>{{ item.texto }}</p>
+								</div>
+								{% if item.link %}
+									</a>
+								{% endif %}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="imagem" data-stellar-ratio="1.5">
+					<img src="{{ imoveis24.get_field('imagem_chamada') }}">
+					{% if imoveis24.get_field('link_youtube') %}
+					<a href="{{ imoveis24.get_field('link_youtube') }}" class="link_youtube"></a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<div class="imagem-full _bg wow fadeIn" style="background-image: url({{ Image(post.get_field('Imagem_chamada2')) }});">
+			{% if post.get_field('link_youtube') %}
+			<a href="{{ post.get_field('link_youtube') }}" class="link_youtube"></a>
+			{% endif %}
+		</div>
+
+		<div class="solicite wow fadeIn">
+			<div class="container">
+				<div class="Row _gutters _mb60">
+					<div class="col _col-6 _offset-3">
+						<div class="texto">
+							<h2 class="_bluelight">{{ post.get_field('titulo_solicite') }}</h2>
+							<p>{{ post.get_field('texto_solicite') }}</p>
+							{% if post.get_field('link_login') %}
+							<a class="Button" href="{{post.get_field('link_login').url}}" target="_blank">Login</a>
+							{% endif %}
+							{% if post.get_field('link_cadastre') %}
+							<a class="Button" href="{{post.get_field('link_cadastre').url}}" target="_blank">{% if fn('get_locale') == 'pt_BR' %}Cadastrar{% elseif fn('get_locale') == 'es_ES' %}Registrar{% else %}Register{% endif %}</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

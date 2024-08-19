@@ -1,0 +1,63 @@
+{% extends 'base.twig' %}
+
+{% block conteudo %}
+	<section class="Page _servicos">
+		<div class="container">
+			<div class="content wow fadeIn">
+				<div class="Row _gutters">
+					<div class="col _col-6">
+						<p class="titulo">{{ post.get_field('titulo') }}</p>
+						<h2 class="subtitulo">{{ post.get_field('subtitulo') }}</h2>
+						{{ post.get_field('texto') }}
+					</div>
+					<div class="col _col-6">
+						<img src="{{ post.get_field('banner') }}">
+					</div>
+				</div>
+			</div>
+
+			<div class="servicos">
+				{% for key,item in posts %}
+					<div id="item{{key}}" class="item _hide wow fadeIn" data-component="toggle" data-target="#item{{key}}">
+						<div class="img _bg" style="background-image:url({{ Image(item.get_field('imagem')) }})"><span>{% if fn('get_locale') == 'pt_BR' %}ver mais{% elseif fn('get_locale') == 'es_ES' %}ver más{% else %}view more{% endif %}</span></div>
+						<h2 class="titulo">
+							{{ item.title }}
+							<span class="link">{% if fn('get_locale') == 'pt_BR' %}ver mais{% elseif fn('get_locale') == 'es_ES' %}ver más{% else %}view more{% endif %} <i class="icon-arrow-right"></i></span>
+						</h2>
+						<div class="texto">
+							{{ item.get_field('texto') }}
+
+							<div class="itens">
+							{% for item in item.get_field('itens') %}
+								<div class="item">
+									<img src="{{ item.foto|letterbox(300,300,'#ffffff') }}" alt="{{ item.title }}">
+									<div class="infos">
+										<h3 class="titulo">{{ item.titulo }}</h3>
+										<p>{{ item.texto }}</p>
+									</div>
+								</div>
+							{% endfor %}
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+
+			<div class="chamadas wow fadeIn">
+				<div class="Row _gutters">
+					{% for item in post.get_field('chamadas') %}
+					<div class="col _col-6">
+						<a href="{{ item.link.url }}">
+							<div class="img _bg" style="background-image:url({{ Image(item.foto) }})"></div>
+							<h3>{{ item.titulo }}</h3>
+							<p>{{ item.texto }}</p>
+							<span class="link">{% if fn('get_locale') == 'pt_BR' %}ver mais{% elseif fn('get_locale') == 'es_ES' %}ver más{% else %}view more{% endif %} <i class="icon-arrow-right"></i></span>
+						</a>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

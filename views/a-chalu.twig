@@ -1,0 +1,150 @@
+{% extends 'base.twig' %}
+
+{% block conteudo %}
+
+	<section class="Banner _page">
+		<div class="item wow fadeIn" style="background-image: url({{ Image(post.get_field('banner')) }});"></div>
+	</section>
+
+	<section class="Page _imoveis">
+		<div class="container">
+			<div class="topo _tac wow fadeIn">
+				<span class="link-outline">{{ post.title }}</span>
+				<h2 class="titulo">{{ post.get_field('titulo') }}</h2>
+			</div>
+
+			<div class="content wow fadeIn">
+				<div class="Row _gutters">
+					<div class="col _col-6">{{ post.get_field('texto') }}</div>
+					<div class="col _col-6 galeria" data-component="galeria">
+						<a class="item _first" href="{{ post.get_field('fotos').0.foto }}" title="{{ item.legenda }}"><img src="{{ post.get_field('fotos').0.foto|resize(600,400) }}" alt="{{ item.legenda }}"></a>
+
+						<div class="galeria-carousel" data-component="galeria-carousel" data-items="2">
+						{% for key,item in post.get_field('fotos') if key != 0 %}
+							<a class="item" href="{{ item.foto }}" title="{{ item.legenda }}"><img src="{{ item.foto|resize(150,100) }}" alt="{{ item.legenda }}"></a>
+						{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="Propostas wow fadeIn">
+		<div class="imagem _bg" style="background-image: url({{ Image(home.get_field('imagem_proposta')) }});">
+			{% if home.get_field('link_youtube') %}
+			<a href="{{ home.get_field('link_youtube') }}" class="link_youtube"></a>
+			{% endif %}
+		</div>
+	</section>
+
+	<section class="Chamada wow fadeIn">
+		<div class="container">
+			<div class="Row _gutters">
+				<div class="col _col-5">
+					<img class="foto" src="{{ Image(home.get_field('blocos')[0].imagem) }}" alt="{{ home.get_field('blocos')[0].titulo }}">
+					<img class="flutua" src="{{ theme.link }}/assets/images/usa.png" data-stellar-ratio="1.1">
+				</div>
+				<div class="col _col-7">
+					<div class="_upper _blue _mb20">#imoveissa</div>
+					<h2 class="titulo">{{ home.get_field('blocos')[0].titulo }}</h2>
+					<p>{{ home.get_field('blocos')[0].texto }}</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="imoveis24h">
+		<div class="chamada">
+			<div class="container">
+				<div class="topo wow fadeIn">
+					<span class="link-outline _white _mb50">imoveis24horas</span>
+					<h2 class="titulo">{{ imoveis24.get_field('titulo_chamada') }}</h2>
+					<p>{{ imoveis24.get_field('texto_chamada') }}</p>
+				</div>
+
+				<div class="etapas">
+					{% for item in imoveis24.get_field('etapas') %}
+						<div class="item wow fadeIn">
+							<img src="{{ item.imagem }}" alt="{{ item.titulo }}">
+							<div class="texto">
+								<h3>{{ item.titulo }}</h3>
+								<p>{{ item.texto }}</p>
+							</div>
+						</div>
+					{% endfor %}
+					<div class="link wow fadeIn">
+						<a class="Button" href="{{ site.link }}/imoveis24h">{% if fn('get_locale') == 'pt_BR' %}Quero saber mais{% elseif fn('get_locale') == 'es_ES' %}Quiero saber más{% else %}Know more{% endif %}</a>
+					</div>
+				</div>
+			</div>
+			<div class="imagem" data-stellar-ratio="1.2">
+				<img src="{{ imoveis24.get_field('imagem_chamada') }}">
+			</div>
+		</div>
+	</section>
+	
+	<section class="imoveissa wow fadeIn">
+		<div class="container">
+		</div>
+	</section>
+
+	<section class="Noticias wow fadeIn">
+		<div class="container">
+			<div class="topo-home">
+				<span class="link-outline">{% if fn('get_locale') == 'pt_BR' %}Notícias{% elseif fn('get_locale') == 'es_ES' %}Noticias{% else %}News{% endif %}</span>
+				<h2>{% if fn('get_locale') == 'pt_BR' %}Últimos artigos{% elseif fn('get_locale') == 'es_ES' %}Últimos artículos{% else %}Latest Articles{% endif %}</h2>
+			</div>
+
+			<div class="Row _gutters itens">
+			{% for key,item in noticias %}
+				{% if key == 1 %}
+				<div class="col _col-6">
+				{% endif %}
+				{% if key == 0 %}
+				<div class="item col _col-6">
+					<a href="{{ item.link }}">
+						<div class="imagem _bg" style="background-image: url({{ Image(item.get_field('imagem')) }});"></div>
+						<div class="infos">
+							<div class="tags">
+								{% for term in item.terms %}
+									<div class="tag" style="background: {{ term.cor }}">{{ term.name }}</div>
+								{% endfor %}
+							</div>
+							<h3 class="titulo">{{ item.title }}</h3>
+							<span class="link">> {% if fn('get_locale') == 'pt_BR' %}{% if fn('get_locale') == 'pt_BR' %}ver mais{% elseif fn('get_locale') == 'es_ES' %}ver más{% else %}view more{% endif %}{% elseif fn('get_locale') == 'es_ES' %}ver más{% else %}view more{% endif %}</span>
+						</div>
+					</a>
+				</div>
+				{% else %}
+				<div class="Row _gutters item">
+					<div class="col _col-6">
+						<a href="{{ item.link }}">
+							<div class="imagem _bg" style="background-image: url({{ Image(item.get_field('imagem')) }});"></div>
+						</a>
+					</div>
+					<div class="col _col-6">
+						<a href="{{ item.link }}">
+							<div class="infos">
+								<div class="tags">
+									{% for term in item.terms %}
+										<div class="tag" style="background: {{ term.cor }}">{{ term.name }}</div>
+									{% endfor %}
+								</div>
+								<h3 class="titulo">{{ item.title }}</h3>
+								<span class="link">> {% if fn('get_locale') == 'pt_BR' %}ver mais{% elseif fn('get_locale') == 'es_ES' %}ver más{% else %}view more{% endif %}</span>
+							</div>
+						</a>
+					</div>
+				</div>
+				{% endif %}
+
+				{% if key == 2 %}
+				</div>
+				{% endif %}
+			{% endfor %}
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

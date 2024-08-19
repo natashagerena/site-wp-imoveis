@@ -1,0 +1,212 @@
+{% extends 'base.twig' %}
+
+{% block conteudo %}
+
+	<section class="Banner" data-component="banner">
+		{% for item in post.get_field('banners') %}
+			<div class="item" style="background-image: url({{ Image(item.imagem) }});">
+				{% if item.link %}
+				<a href="{{ item.link }}" class="link"></a>
+				{% endif %}
+				<div class="container">
+					<div class="texto">
+						<h2 class="_middle">{{ item.legenda }}</h2>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</section>
+	
+	<section class="Propostas wow fadeIn">
+		<div class="container">
+			<div class="Row _gutters">
+				{% for item in post.get_field('propostas') %}
+				<div class="col _col-3">
+					<h3>{{ item.titulo }}</h3>
+					<p>{{ item.texto }}</p>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+
+		<div class="imagem _bg wow fadeIn" style="background-image: url({{ Image(post.get_field('imagem_proposta')) }});">
+			{% if post.get_field('link_youtube') %}
+			<a href="{{ post.get_field('link_youtube') }}" class="link_youtube"></a>
+			{% endif %}
+		</div>
+	</section>
+
+	<section class="Chamada">
+		<div class="container">
+			<div class="Row _gutters wow fadeIn">
+				<div class="col _col-5">
+					<img class="foto" src="{{ post.get_field('imagem_chamada') }}" alt="{{ post.get_field('nome_chamada') }}">
+				</div>
+				<div class="col _col-7">
+					<span class="_upper _blue">{{ post.get_field('nome_chamada') }}</span>
+					<h2>{{ post.get_field('titulo_chamada') }}</h2>
+					<p>{{ post.get_field('texto_chamada') }}</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="imoveis24h">
+		<div class="chamada">
+			<div class="container">
+				<div class="topo wow fadeIn">
+					<span class="link-outline _white _mb50">imoveis24horas</span>
+					<h2 class="titulo">{{ imoveis24.get_field('titulo_chamada') }}</h2>
+					<p>{{ imoveis24.get_field('texto_chamada') }}</p>
+				</div>
+
+				<div class="etapas">
+					{% for item in imoveis24.get_field('etapas') %}
+						<div class="item wow fadeIn">
+							<img src="{{ item.imagem }}" alt="{{ item.titulo }}">
+							<div class="texto">
+								<h3>{{ item.titulo }}</h3>
+								<p>{{ item.texto }}</p>
+							</div>
+						</div>
+					{% endfor %}
+					<div class="link wow fadeIn">
+						<a class="Button" href="{{ site.link }}/imoveis24h">{% if fn('get_locale') == 'pt_BR' %}Quero saber mais{% elseif fn('get_locale') == 'es_ES' %}Quiero saber más{% else %}Know more{% endif %}</a>
+					</div>
+				</div>
+			</div>
+			<div class="imagem" data-stellar-ratio="1.5">
+				<img src="{{ imoveis24.get_field('imagem_chamada') }}">
+				{% if imoveis24.get_field('link_youtube') %}
+				<a href="{{ imoveis24.get_field('link_youtube') }}" class="link_youtube"></a>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+
+	<section class="Lista-imoveis">
+		<div class="container">
+			<div class="topo-home wow fadeIn">
+				<span class="chama">#chamaimoveis</span>
+				<h2>{% if fn('get_locale') == 'pt_BR' %}Destaques{% elseif fn('get_locale') == 'es_ES' %}Destacados{% else %}Highlights{% endif %}</h2>
+			</div>
+
+			<div class="Row _gutters itens wow fadeIn">
+			{% for item in imoveis %}
+				<div class="item col _col-4">
+					<a href="{{ item.link }}">
+						<div class="imagem _bg" style="background-image: url({{ Image(item.get_field('fotos').0.foto) }});">
+							{% if item.get_field('anuncio_novo') == 'sim' %}
+								<span class="novo">{% if fn('get_locale') == 'pt_BR' %}Anúncio novo{% elseif fn('get_locale') == 'es_ES' %}Nuevo anuncio{% else %}New ad{% endif %}</span>
+							{% endif %}
+						</div>
+						<div class="infos">
+							<div class="top">
+								<span class="titulo"><i class="icon-local"></i>{{ item.title }}</span>
+								<span class="cod">{% if fn('get_locale') == 'pt_BR' %}Código{% elseif fn('get_locale') == 'es_ES' %}Código{% else %}Code{% endif %} {{ item.get_field('codigo') }}</span>
+							</div>
+							<div class="tags">
+								{% for tag in item.tags %}
+									<div class="tag">{{ tag.name }}</div>
+								{% endfor %}
+							</div>
+							<span class="link">> {% if fn('get_locale') == 'pt_BR' %}ver mais{% elseif fn('get_locale') == 'es_ES' %}ver más{% else %}view more{% endif %}</span>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+			</div>
+			<div class="_tac wow fadeIn">
+				<a href="{{ site.url }}/alugar" class="Button">{% if fn('get_locale') == 'pt_BR' %}Descubra mais Imóveis{% elseif fn('get_locale') == 'es_ES' %}Descubre más Propiedades{% else %}Discover more Properties{% endif %}</a>
+			</div>
+		</div>
+	</section>
+	
+	<section class="imoveissa">
+		<div class="container">
+			{% for item in post.get_field('blocos') %}
+				<div class="Row _gutters item">
+					<div class="col _col-6 wow fadeInUp">
+						<img src="{{ Image(item.imagem) }}" alt="{{ item.titulo }}">
+					</div>
+					<div class="col _col-6  wow fadeIn">
+						<span class="tag">#imoveissa</span>
+						<h2 class="titulo">{{ item.titulo }}</h2>
+						<p>{{ item.texto }}</p>
+						<a class="link">{% if fn('get_locale') == 'pt_BR' %}Mais da imoveis{% elseif fn('get_locale') == 'es_ES' %}Mas de imoveis{% else %}More from imoveis{% endif %} <i class="icon-arrow-right"></i></a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+
+	<section class="Noticias _home">
+		<div class="container">
+			<div class="topo-home wow fadeIn">
+				<span class="link-outline">{% if fn('get_locale') == 'pt_BR' %}Notícias{% elseif fn('get_locale') == 'es_ES' %}Noticias{% else %}News{% endif %}</span>
+				<h2>{% if fn('get_locale') == 'pt_BR' %}Últimos artigos{% elseif fn('get_locale') == 'es_ES' %}Últimos artículos{% else %}Latest Articles{% endif %}</h2>
+			</div>
+
+			<div class="Row _gutters itens wow fadeIn">
+			{% for key,item in noticias %}
+				{% if key == 1 %}
+				<div class="col _col-6">
+				{% endif %}
+				{% if key == 0 %}
+				<div class="item col _col-6">
+					<a href="{{ item.link }}">
+						<div class="imagem _bg" style="background-image: url({{ Image(item.get_field('imagem')) }});"><span>{% if fn('get_locale') == 'pt_BR' %}Leia mais{% elseif fn('get_locale') == 'es_ES' %}Lea mas{% else %}Read more{% endif %}</span></div>
+						<div class="infos">
+							<div class="tags">
+								{% for term in item.terms %}
+									<div class="tag" style="background: {{ term.cor }}">{{ term.name }}</div>
+								{% endfor %}
+							</div>
+							<h3 class="titulo">{{ item.title }}</h3>
+							<span class="link">> {% if fn('get_locale') == 'pt_BR' %}ver mais{% elseif fn('get_locale') == 'es_ES' %}ver más{% else %}view more{% endif %}</span>
+						</div>
+					</a>
+				</div>
+				{% else %}
+				<div class="Row _gutters item">
+					<div class="col _col-6">
+						<a href="{{ item.link }}">
+							<div class="imagem _bg" style="background-image: url({{ Image(item.get_field('imagem')) }});"><span>{% if fn('get_locale') == 'pt_BR' %}Leia mais{% elseif fn('get_locale') == 'es_ES' %}Lea mas{% else %}Read more{% endif %}</span></div>
+						</a>
+					</div>
+					<div class="col _col-6">
+						<a href="{{ item.link }}">
+							<div class="infos">
+								<div class="tags">
+									{% for term in item.terms %}
+										<div class="tag" style="background: {{ term.cor }}">{{ term.name }}</div>
+									{% endfor %}
+								</div>
+								<h3 class="titulo">{{ item.title }}</h3>
+								<span class="link">> {% if fn('get_locale') == 'pt_BR' %}ver mais{% elseif fn('get_locale') == 'es_ES' %}ver más{% else %}view more{% endif %}</span>
+							</div>
+						</a>
+					</div>
+				</div>
+				{% endif %}
+
+				{% if key == 2 %}
+				</div>
+				{% endif %}
+			{% endfor %}
+			</div>
+		</div>
+	</section>
+
+	<section class="Instagram wow fadeIn">
+		<div class="container">
+			<div class="topo-home">
+				<span class="link-outline">Intagram</span>
+				<h2>{% if fn('get_locale') == 'pt_BR' %}Acesse{% elseif fn('get_locale') == 'es_ES' %}Ir a{% else %}Go to{% endif %} @imoveis.imoveis</h2>
+			</div>
+			<!-- SnapWidget -->
+			<script src="https://snapwidget.com/js/snapwidget.js"></script>
+			<iframe src="https://snapwidget.com/embed/983381" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden;  width:100%; "></iframe>
+		</div>
+	</section>
+{% endblock %}

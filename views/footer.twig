@@ -1,0 +1,80 @@
+
+	<div class="Cookies">
+	    <div class="text">
+	        <h3>{% if fn('get_locale') == 'pt_BR' %}Nós usamos cookies{% elseif fn('get_locale') == 'es_ES' %}Usamos cookies{% else %}We use cookies{% endif %}</h3>
+	        <p>{% if fn('get_locale') == 'pt_BR' %}
+	        	Este site usa cookies para aprimorar sua experiência de navegação.
+	        {% elseif fn('get_locale') == 'es_ES' %}
+	        	Este website utiliza cookies para mejorar su experiencia de navegación.
+	        {% else %}
+	        	This website uses cookies to improve your browsing experience.
+	        {% endif %}
+	        	</p>
+	    </div>
+	    <div class="actions">
+	        <a href="{{ site.url }}/politica-de-privacidade" class="link">{% if fn('get_locale') == 'pt_BR' %}Saiba mais{% elseif fn('get_locale') == 'es_ES' %}Conocer más{% else %}Know more{% endif %}</a>
+	        <a href="" class="Button">ok</a>
+	    </div>
+	</div>
+
+	<footer class="Footer">
+		<div class="container">
+			<div class="logo"><img src="{{ option('logo_rodape') }}" alt="{{ site.name }}"></div>
+
+			<div class="infos1">
+				<div class="item">
+					<i class="icon-local"></i>
+					<span>{{ option('endereco') }}</span>
+				</div>
+				<div class="item">
+					<i class="icon-tel"></i>
+					<span>
+						{% for item in option('telefones') %}
+						<a href="tel:{{ item.telefone }}">{{ item.telefone }}</a>
+						{% endfor %}
+					</span>
+				</div>
+			</div>
+			<div class="infos2">
+				<div class="item">
+					<i class="icon-email"></i>
+					<span>
+						E-mails: 
+						{% for item in option('emails') %}
+						<a href="mailto:{{ item.email }}">{{ item.email }}</a>
+						{% endfor %}
+					</span>
+				</div>
+			</div>
+
+			<ul class="redes-sociais">
+				{% for item in option('redes_sociais') %}
+                    <li><a target="_target" href="{{ item.link }}"><i class="icon-{{ item.nome }}"></i></a></li>
+                {% endfor %}
+			</ul>
+
+			<div class="copy">
+				<p>{% if fn('get_locale') == 'pt_BR' %}Site projetado pela{% elseif fn('get_locale') == 'es_ES' %}Website diseñado por{% else %}Website designed by{% endif %} @NittroBr Studio de Marcas</p>
+			</div>
+		</div>
+	</footer>
+
+    <script src="{{ asset('js/app.min.js') }}"></script>
+	<script src="https://unpkg.com/@webcreate/infinite-ajax-scroll/dist/infinite-ajax-scroll.min.js"></script>
+	<script>
+		if ($('#lista').length) {
+			let ias = new InfiniteAjaxScroll('#lista', {
+				item: '.card-imovel',
+				next: '.next',
+				trigger: '.trigger',
+			});
+		}
+	</script>
+
+	{# inserindo script mapa #}
+	{{ fn('get_option_mapa') }}
+    </main>
+    
+	{{ wp_footer }}
+</body>
+</html>

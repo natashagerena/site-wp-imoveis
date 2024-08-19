@@ -1,0 +1,210 @@
+.Header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 15px 0;
+	z-index: 100;
+	background-color: #fff;
+	box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.16);
+
+	nav {
+		position: absolute;
+		top: 0;
+		left: 164px;
+
+		ul {
+			li {
+				display: inline-block;
+				margin-right: 2px;
+
+				a {
+					display: block;
+					padding: 6px 17px;
+					border-radius: 16px;
+					font-size: 14px;
+
+					&:hover {
+						background-color: #eee;
+					}
+
+					&._active {
+						background-color: $blue;
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
+
+	.Button {
+		position: absolute;
+		top: 0;
+		right: 130px;
+		height: 32px;
+		width: 163px;
+		border: 0;
+		border-radius: 16px;
+		background: linear-gradient(135deg, #FF0080 0%, #7928CA 100%);
+		box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.07);
+		box-shadow: 0px 4px 7px -1px rgba(0, 0, 0, 0.11);
+		font-size: 12px;
+		font-weight: bold;
+		line-height: 32px;
+		text-transform: uppercase;
+	}
+
+	
+	.langs {
+		position: absolute;
+		top: 4px;
+		right: 0;
+
+		#qtranslate-chooser {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+
+			li {
+				display: inline-block;
+				margin: 0 3px;
+
+				a {
+					display: block;
+					width: 30px;
+					height: 30px;
+					background-size: contain;
+					background-position: center;
+					background-repeat: no-repeat;
+				}
+
+				img {
+					display: none;
+				}
+
+				&.lang-en a {
+					background-image: url(../images/en.png);
+				}
+
+				&.lang-pb a {
+					background-image: url(../images/pb.png);
+				}
+
+				&.lang-es a {
+					background-image: url(../images/es.png);
+				}
+
+				&:hover {
+					opacity: 0.7;
+				}
+			}
+		}
+	}
+}
+
+@include breakpoint(0, $lg) {
+	.Header {
+		nav {
+			left: 110px;
+
+			ul {
+				li {
+					a {
+						padding: 6px 10px;
+						font-size: 14px;
+					}
+				}
+			}
+		}
+
+		.Button {
+			right: 120px;
+			width: 140px;
+		}
+		
+		.langs {
+			#qtranslate-chooser {
+				li {
+					margin: 0 2px;
+				}
+			}
+		}
+	}
+}
+
+@include breakpoint(0, $md) {
+	.Header {
+		nav {
+			left: 110px;
+
+			ul {
+				li {
+					a {
+						padding: 6px;
+						font-size: 13px;
+					}
+				}
+			}
+		}
+
+		.Button {
+			display: none;
+		}
+	}
+}
+
+@include breakpoint(0, $sm) {
+	.Header {
+		.toggle {
+			position: absolute;
+			top: -5px;
+			right: 0;
+			font-size: 30px;
+		}
+
+		.langs {
+			right: 40px;
+		}
+
+		nav {
+			display: none;
+			width: 100%;
+			top: 100%;
+			left: 0;
+			padding: 20px;
+			background-color: #fff;
+			text-align: center;
+
+			ul {
+				li {
+					display: block;
+
+					a {
+						padding: 6px 15px;
+						font-size: 13px;
+					}
+				}
+			}
+		}
+
+		.Button {
+			&._show-sm {
+			    position: relative;
+				display: block;
+			    top: auto;
+			    right: auto;
+			    margin: 0 auto;
+			}
+		}
+	}
+
+	._toggled {
+		.Header {
+			nav {
+				display: block;
+			}
+		}
+
+	}
+
+}

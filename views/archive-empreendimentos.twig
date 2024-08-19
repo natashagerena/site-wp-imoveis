@@ -1,0 +1,45 @@
+{% extends 'base.twig' %}
+
+{% block conteudo %}
+
+	<section class="Banner _page">
+		<div class="item wow fadeIn" style="background-image: url({{ Image(post.get_field('imagem')) }});"></div>
+	</section>
+
+	<section class="Page _empreendimentos">
+		<div class="container">
+			<div class="content">
+			{% for emp in posts %}
+				<div class="Row _gutters _mb50 wow fadeIn">
+					<div class="col _col-6">
+						<a href="{{ emp.link }}">
+							<p class="_h5">{{ emp.title }}</p>
+							<h2>{{ emp.get_field('subtitulo') }}</h2>
+							{{ emp.get_field('texto') }}
+
+							<div class="tags">
+								{% for tag in emp.tags %}
+									<div class="tag">{{ tag.name }}</div>
+								{% endfor %}
+							</div>
+						</a>
+					</div>
+					<div class="col _col-6 galeria">
+						<a href="{{ emp.link }}">
+							<span class="item _first"><img src="{{ emp.get_field('fotos').0.foto|resize(600,400) }}" alt="{{ item.legenda }}"></span>
+
+							<div class="galeria-carousel">
+							{% for item in emp.get_field('fotos')|slice(1,7) %}
+								<span class="item"><img src="{{ item.foto|resize(150,100) }}" alt="{{ item.legenda }}"></span>
+							{% endfor %}
+							</div>
+						</a>
+					</div>
+				</div>
+			{% endfor %}
+			</div>
+		</div>
+	</section>
+
+
+{% endblock %}

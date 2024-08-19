@@ -1,0 +1,25 @@
+.Propostas {
+	background-color: $blue;
+	color: #fff;
+	text-align: center;
+
+	&._page {
+	    z-index: -1;
+	}
+
+	* {
+		color: #fff;
+	}
+
+	.container {
+		padding: 60px 20px;
+
+		p {
+			margin-bottom: 0;
+		}
+	}
+
+	.imagem {
+		height: 500px;
+	}
+}

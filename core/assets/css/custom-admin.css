@@ -1,0 +1,21 @@
+#wp-admin-bar-comments,
+#wp-admin-bar-new-content,
+#dashboard_activity,
+#minor-publishing-actions,
+.misc-pub-revisions,
+.wlcms_wrap #wlcms-sidebar,
+.post-type-page .wrap .page-title-action,
+.post-type-page .wrap .add-new-h2,
+#update-nag, .update-nag
+{display: none;}
+
+.wlcms_wrap #wlcms-container
+{margin-right: 0 !important;}
+
+.acf_postbox .field textarea {
+    min-height: auto;
+}
+
+#adminmenu, #adminmenu .wp-submenu, #adminmenuback, #adminmenuwrap {
+    width: 170px;
+}

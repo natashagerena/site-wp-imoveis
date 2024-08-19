@@ -1,0 +1,74 @@
+// BASE VARS
+// ============================================================================
+
+// Breakpoints
+$lg: 1300px;
+
+// Colors
+$blue: #24599A;
+$bluelight: #2196F3;
+
+// Font families
+$font-family: 'Open Sans', sans-serif;
+
+// Font sizes
+$font-size: 16px;
+$font-size-small: $font-size - 2px;
+
+// Baselines
+$baseline: 1.5;
+
+// Sizes
+$size-1x: ($font-size * $baseline) / 2;
+$size-2x: $size-1x * 2;
+$size-3x: $size-1x * 3;
+$size-4x: $size-1x * 4;
+
+// Margins
+$margin-bottom: $size-2x;
+
+// Borders
+$border-radius: 8px;
+
+
+
+// COMPONENT VARS
+// ============================================================================
+
+// Row
+$grid-gutter: 4%;
+
+// Heading
+$heading-color: #24599A;
+$heading-font-family: 'Raleway', sans-serif;
+$heading-font-size-1: 35px;
+$heading-font-size-2: 35px;
+$heading-font-size-3: 24px;
+$heading-font-size-4: 20px;
+$heading-font-size-5: 18px;
+$heading-font-size-6: 16px;
+$heading-font-weight: 600;
+$heading-line-height: 1.2;
+
+// Typograph
+$text-color: #293A24;
+
+// Link
+$link-color: #24599A;
+$link-color-hover: darken($link-color, 20%);
+
+// Form
+$input-padding: 0 $size-1x;
+$input-border-color: #D2D6DA;
+$input-height: 40px;
+$input-font-size: $font-size-small;
+
+// Button
+$button-padding: 0 $size-1x;
+$button-color-primary: #24599A;
+$button-color-primary-text: #ffffff;
+$button-color-secondary: #2196F3;
+$button-color-secondary-text: #ffffff;
+$button-font-family: $font-family;
+$button-font-size: $font-size-small;
+$button-font-weight: 400;

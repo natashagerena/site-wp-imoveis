@@ -1,0 +1,78 @@
+// GERAL
+.container {
+	position: relative;
+	width: 1200px;
+	margin: 0 auto;
+}
+
+._blue {color: $blue;}
+._bluelight {color: $bluelight;}
+
+a {
+	text-decoration: none;
+	transition: 300ms;
+}
+
+main {
+	overflow: hidden;
+	padding-top: 66px;
+}
+
+._bg {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.Button {
+	text-transform: uppercase;
+}
+
+.link-outline {
+	display: inline-block;
+	height: 34px;
+	padding: 0 30px;
+	margin-bottom: 20px;
+	border: 1px solid #2196F3;
+	color: #2196F3;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 34px;
+	letter-spacing: 0em;
+	text-align: center;
+
+	&._white {
+		border-color: #fff;
+	}
+}
+
+iframe {
+	max-width: 100%;
+}
+
+@include breakpoint(0, $lg) {
+	.container {
+		width: 970px;
+	}
+}
+
+@include breakpoint(0, $md) {
+	.container {
+		width: 750px;
+	}
+
+	h1,._h1 {font-size: 30px;}
+	h2,._h2 {font-size: 30px;}
+	h3,._h3 {font-size: 20px;}
+}
+
+@include breakpoint(0, $sm) {
+	.container {
+		width: 90%;
+	}
+
+	h1,._h1 {font-size: 28px;}
+	h2,._h2 {font-size: 28px;}
+
+}

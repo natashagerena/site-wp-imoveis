@@ -1,0 +1,25 @@
+.Chamada {
+	padding: 120px 0;
+
+	.container {
+		padding: 0 70px;
+
+		@include breakpoint(0, $lg) {
+			padding: 0;
+		}
+
+		.Row {
+			align-items: center;
+		}
+	}
+
+	.foto {
+		border-radius: 20px;
+	}
+
+	.flutua {
+		position: absolute;
+		bottom: 0px;
+		left: -104px;
+	}
+}

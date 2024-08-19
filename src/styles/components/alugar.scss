@@ -1,0 +1,204 @@
+.Alugar {
+	.topo {
+		display: flex;
+		align-items: center;
+		place-content: space-between;
+		flex-wrap: wrap;
+		padding: 60px 0 20px;
+
+		.titulo {
+			display: flex;
+			align-items: center;
+			margin: 0;
+			
+			.novo {
+				display: inline-block;
+				margin-left: 8px;
+				padding: 8px 16px;
+				border-radius: 8px;
+				font-size: 11px;
+				font-weight: 700;
+				line-height: 1;
+				text-align: center;
+				background: #FDE802;
+				text-transform: uppercase;
+			}
+		}
+
+
+		// .bairro {
+		// 	position: absolute;
+		// 	top: 65%;
+		// 	left: 50%;
+		// 	transform:translateX(-50%) translateY(-50%);
+		// }
+		// .cod {
+		// 	position: absolute;
+		// 	top: 65%;
+		// 	right: 0;
+		// 	transform: translateY(-50%);
+		// }
+	}
+
+	.texto, .infos {
+		margin-bottom: 64px;
+	}
+
+	.fotos {
+		padding-top: 110px;
+	}
+
+	.tags {
+		margin-bottom: 40px;
+
+		.tag {
+			display: inline-block;
+			background: #BBBBBB;
+			border-radius: 8px;
+			padding: 4px 20px;
+			margin-bottom: 6px;
+			color: #fff;
+			font-size: 11px;
+			font-weight: 600;
+			text-transform: uppercase;
+		}
+	}
+
+	.tabs {
+		margin: 0 0 20px;
+		text-transform: uppercase;
+		border-bottom: 1px solid rgba(170, 170, 170, 0.3);
+
+		li {
+			display: inline-block;
+
+			a {
+				display: block;
+				padding: 10px;
+				color: #BCBEC0;
+				border-bottom: 3px solid transparent;
+
+				&._active {
+					display: block;
+					padding: 10px;
+					color: $blue;
+					border-bottom: 3px solid #2196F3;
+				}
+
+				&:hover {
+					border-bottom-color: #BCBEC0;
+				}
+			}
+		}
+	}
+
+	.info-valor {
+		margin-top: -70px;
+		padding: 60px 40px;
+		background: rgba(255, 255, 255, 0.8);
+		mix-blend-mode: normal;
+		box-shadow: 0px 20px 26px rgba(0, 0, 0, 0.05), 0px 8px 9px rgba(0, 0, 0, 0.06);
+		backdrop-filter: blur(50px);
+		border-radius: 16px;
+	}
+
+	.formulario {
+		.titulo {
+			border-bottom: 1px solid rgba(170, 170, 170, 0.3);
+			padding-bottom: 20px;
+		}
+	}
+
+	textarea {
+		height: 190px;
+	}
+
+	.galeria-carousel {
+		margin-bottom: 20px;
+		
+		.owl-nav {
+			position: unset;
+			font-size: 40px;
+			color: #BCBEC0;
+
+			div {
+				position: absolute;
+				top: 50%;
+				right: 100%;
+				transform: translateY(-50%);
+
+				&.owl-next {
+					left: 100%;
+					right: auto;
+				}
+
+				i:before {
+					width: auto;
+					margin: 0 10px;
+				}
+			}
+		}
+	}
+
+	&._empre {
+		margin-bottom: 80px;
+	}
+
+	&._bg-silver {
+		padding: 92px 0;
+		background-color: #F6F6F6;
+	}
+
+	iframe {
+		max-width: 100%;
+	}
+
+	@include breakpoint(0, $md) {
+		.topo .bairro {
+		    position: absolute;
+		    top: 65%;
+		    left: auto;
+		    right: 150px;
+		    transform: translateY(-50%);
+		}
+
+		.formulario {
+		    padding: 40px 20px;
+		}
+	}
+
+	@include breakpoint(0, $sm) {
+		.topo {
+			text-align: center;
+
+			.bairro, .cod {
+				display: block;
+			    position: relative;
+			    top: 0;
+			    right: 0;
+			    transform: none;
+			    margin: 10px 0;
+			}
+		}
+		.info-valor {
+			margin-top: 0;
+			padding: 40px 20px;
+		}
+
+		.formulario {
+		    padding: 40px 0;
+		}
+	}
+}
+
+.empreendimentos {
+	.Alugar {
+		.topo {
+			.titulo {
+				flex-grow: 1;
+				width: 100%;
+				margin-bottom: 8px;
+			}
+		}
+	}
+}

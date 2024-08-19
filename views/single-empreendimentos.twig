@@ -1,0 +1,212 @@
+{% extends 'base.twig' %}
+
+{% block conteudo %}
+
+	<section class="Alugar _mb60">
+		<div class="container">
+			<div class="Row _gutters">
+				<div class="col">
+					<div class="topo wow fadeIn">
+						<h2 class="titulo">
+							{{ post.title }}
+							{% if post.get_field('anuncio_novo') == 'sim' %}
+								<span class="novo">{% if fn('get_locale') == 'pt_BR' %}Anúncio novo{% elseif fn('get_locale') == 'es_ES' %}Nuevo anuncio{% else %}New ad{% endif %}</span>
+							{% endif %}
+						</h2>
+						{% if post.get_field('bairro') %}
+							<span class="bairro _bluelight"><i class="icon-local"></i>{{ post.get_field('bairro') }}</span>
+						{% endif %}
+						{% if post.get_field('codigo') %}
+							<span class="cod _bluelight">{% if fn('get_locale') == 'pt_BR' %}Código{% elseif fn('get_locale') == 'es_ES' %}Código{% else %}Code{% endif %} {{ post.get_field('codigo') }}</span>
+						{% endif %}
+					</div>
+
+					<div class="texto">{{ post.get_field('texto') }}</div>
+
+					<ul class="tabs">
+						<li><a href="#" data-tab="#tab1" class="_active">{% if fn('get_locale') == 'pt_BR' %}Características{% elseif fn('get_locale') == 'es_ES' %}Características{% else %}Characteristics{% endif %}</a></li>
+						<li><a href="#" data-tab="#tab2">{% if fn('get_locale') == 'pt_BR' %}Enviar a um amigo{% elseif fn('get_locale') == 'es_ES' %}Enviar a un amigo{% else %}Send to a friend{% endif %}</a></li>
+						<li><a href="#" onclick="window.print();">{% if fn('get_locale') == 'pt_BR' %}Imprimir{% elseif fn('get_locale') == 'es_ES' %}Imprimir{% else %}Print{% endif %}</a></li>
+					</ul>
+
+					<div class="tab infos" id="tab1">
+						{% if post.get_field('endereco') %}
+							<p>
+								{% if fn('get_locale') == 'pt_BR' %}Endereço{% elseif fn('get_locale') == 'es_ES' %}Dirección{% else %}Address{% endif %}:<br>
+								{{ post.get_field('endereco') }}
+							</p>
+						{% endif %}
+						<p>{% if fn('get_locale') == 'pt_BR' %}Área{% elseif fn('get_locale') == 'es_ES' %}Superficie{% else %}Area{% endif %} (m²):<br>
+							{% if post.get_field('area_terreno') %}
+								{% if fn('get_locale') == 'pt_BR' %}Terreno{% elseif fn('get_locale') == 'es_ES' %}Suelo{% else %}Ground{% endif %}: {{ post.get_field('area_terreno') }} <br>
+							{% endif %}
+							{% if post.get_field('area_construcao') %}
+								{% if fn('get_locale') == 'pt_BR' %}Construção{% elseif fn('get_locale') == 'es_ES' %}Construcción{% else %}Construction{% endif %}: {{ post.get_field('area_terreno') }}: {{ post.get_field('area_construcao') }} <br>
+							{% endif %}
+							{% if post.get_field('area_util') %}
+								{% if fn('get_locale') == 'pt_BR' %}Útil{% elseif fn('get_locale') == 'es_ES' %}Útil{% else %}Useful{% endif %}: {{ post.get_field('area_util') }} <br>
+							{% endif %}
+							{% if post.get_field('area_total') %}
+								Total: {{ post.get_field('area_total') }}
+							{% endif %}
+						</p>
+						{% if post.get_field('condicao_do_imovel') %}
+							<p>
+								{% if fn('get_locale') == 'pt_BR' %}Condição do Imóvel{% elseif fn('get_locale') == 'es_ES' %}Condición de la propiedad{% else %}Property Condition{% endif %}: <br>
+								{{ post.get_field('condicao_do_imovel') }}
+							</p>
+						{% endif %}
+						{% if post.get_field('ponto_de_referencia') %}
+							<p>
+								{% if fn('get_locale') == 'pt_BR' %}Ponto de Referência{% elseif fn('get_locale') == 'es_ES' %}Punto de referencia{% else %}Reference point{% endif %}: <br>
+								{{ post.get_field('ponto_de_referencia') }}
+							</p>
+						{% endif %}
+					</div>
+
+					<div class="tab" id="tab2" style="display: none;">
+						<p>{% if fn('get_locale') == 'pt_BR' %}
+							Gostou do imóvel? Essa é a oportunidade de enviar para um amigo. Preencha os campos abaixo e envie agora mesmo.
+						{% elseif fn('get_locale') == 'es_ES' %}
+							¿Te gustó la propiedad? Esta es la oportunidad de enviar a un amigo. Complete los campos a continuación y envíelo de inmediato.
+						{% else %}
+							Did you like the property? This is the opportunity to send to a friend. Fill in the fields below and send it right away.
+						{% endif %}</p>
+
+						<form action="#form_amigo" id="form_amigo" method="post" class="Form">
+							<div class="form-item">
+								<div>
+									<input id="nome" name="nome" value="" required="required" placeholder="{% if fn('get_locale') == 'pt_BR' %}Meu nome{% elseif fn('get_locale') == 'es_ES' %}Mi nombre{% else %}My name{% endif %}" type="text">
+								</div>
+							</div>
+							<div class="form-item">
+								<div>
+									<input id="email" name="email" value="" type="email" required="required" placeholder="meu@email">
+								</div>
+							</div>
+							<div class="form-item">
+								<div>
+									<input id="nome_amigo" name="nome_amigo" value="" required="required" placeholder="{% if fn('get_locale') == 'pt_BR' %}Nome do amigo{% elseif fn('get_locale') == 'es_ES' %}Nombre del amigo{% else %}Friend's name{% endif %}" type="text">
+								</div>
+							</div>
+							<div class="form-item">
+								<div>
+									<input id="email_amigo" name="email_amigo" value="" type="email" required="required" placeholder="emaildoamigo@email">
+								</div>
+							</div>
+							<div class="form-item">
+								<div>
+									<textarea id="mensagem" name="mensagem" required="required" placeholder="{% if fn('get_locale') == 'pt_BR' %}Mensagem{% elseif fn('get_locale') == 'es_ES' %}Mensaje{% else %}Message{% endif %}" cols="60" rows="4"></textarea>
+								</div>
+							</div>
+							<div class="form-item">
+								<button type="submit" class="Button">{% if fn('get_locale') == 'pt_BR' %}Enviar{% elseif fn('get_locale') == 'es_ES' %}Enviar{% else %}Send{% endif %}</button>
+							</div>
+							<input type="hidden" name="form_action" value="form_amigo">
+						</form>
+					</div>
+				</div>
+
+				<div class="col fotos">
+					<div data-component="galeria">
+						<a href="{{ post.get_field('fotos').0.foto }}" title="{{ post.get_field('fotos').0.legenda }}">
+							<img src="{{ post.get_field('fotos').0.foto | resize(618, 424) }}" alt="{{ post.get_field('fotos').0.legenda }}">
+						</a>
+						<div class="galeria-carousel" data-component="galeria-carousel" data-items="4">
+							{% for key,item in post.get_field('fotos') if key != 0 %}
+								<a class="item" href="{{ item.foto }}" title="{{ item.legenda }}">
+									<img src="{{ item.foto|resize(150, 100) }}" alt="{{ item.legenda }}">
+								</a>
+							{% endfor %}
+						</div>
+					</div>
+
+					<div class="tags">
+						{% for tag in post.tags %}
+							<div class="tag">{{ tag.name }}</div>
+						{% endfor %}
+					</div> 
+
+					<h3 class="_upper">{% if fn('get_locale') == 'pt_BR' %}Ficha técnica{% elseif fn('get_locale') == 'es_ES' %}Ficha técnica{% else %}Datasheet{% endif %}</h3>
+					<p class="_blue">
+						{% for item in post.get_field('tags') %}
+							{{ item.tag }} <br>
+						{% endfor %}
+					</p>
+				</div>
+			</div>
+
+			<div class="Row _gutters">
+				<div class="col">
+					<div class="formulario">
+						<h6 class="titulo _upper">{% if fn('get_locale') == 'pt_BR' %}Solicitar +informações{% elseif fn('get_locale') == 'es_ES' %}Solicitar +información{% else %}Request +information{% endif %}</h6>
+						<p>{% if fn('get_locale') == 'pt_BR' %}
+							Entre em contato agora para mais informações
+						{% elseif fn('get_locale') == 'es_ES' %}
+							Póngase en contacto ahora para obtener más información
+						{% else %}
+							Get in touch now for more information
+						{% endif %}</p>
+						{{ form_info_before }}
+							<input name="assunto" value="Mais informações de {{ post.title }}. Link: {{ post.link }}" type="hidden">
+							<div class="form-item">
+								<div><input id="nome" name="nome" value="" required="required" placeholder="{% if fn('get_locale') == 'pt_BR' %}Meu nome{% elseif fn('get_locale') == 'es_ES' %}Mi nombre{% else %}My name{% endif %}" type="text"></div>
+							</div>
+							<div class="form-item">
+								<div><input id="email" name="email" value="" type="email" required="required" placeholder="melhor@email"></div>
+							</div>
+							<div class="form-item">
+								<div><input id="telefone" name="telefone" value="" required="required" placeholder="(00) 00000-0000" class="telefone" type="text" maxlength="15"></div>
+							</div>
+							<div class="form-item">
+								<div><textarea id="mensagem" name="mensagem" required="required" placeholder="{% if fn('get_locale') == 'pt_BR' %}Mensagem{% elseif fn('get_locale') == 'es_ES' %}Mensaje{% else %}Message{% endif %}" cols="60" rows="4"></textarea></div>
+							</div>
+							<div class="form-item _tar">
+								<button type="submit" class="Button">{% if fn('get_locale') == 'pt_BR' %}Enviar{% elseif fn('get_locale') == 'es_ES' %}Enviar{% else %}Send{% endif %}</button>
+							</div>
+							<input type="hidden" name="form_action" value="form_info">
+						{{ form_info_after }}
+					</div>
+				</div>
+
+				<div class="col"></div>
+			</div>
+		</div>
+	</section>
+
+	<div class="Alugar _bg-silver">
+		<div class="container">
+			<div class="Row _gutters">
+				<div class="col">
+					<h3 class="_upper">{% if fn('get_locale') == 'pt_BR' %}Localização{% elseif fn('get_locale') == 'es_ES' %}Localización{% else %}Location{% endif %}</h3>
+					<p>{{ post.get_field('endereco') }}</p>
+					<iframe width="100%" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q={{ post.get_field('endereco')|replace({'<br />':''}) }}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+				</div>
+
+				<div class="col">
+					<h3 class="_upper">{% if fn('get_locale') == 'pt_BR' %}Quero saber mais{% elseif fn('get_locale') == 'es_ES' %}Quiero saber más{% else %}Know more{% endif %}</h3>
+					{{ form_info_before }}
+						<input name="assunto" value="Mais informações de {{ post.title }}. Link: {{ post.link }}" type="hidden">
+						<div class="form-item">
+							<div><input id="nome" name="nome" value="" required="required" placeholder="{% if fn('get_locale') == 'pt_BR' %}Meu nome{% elseif fn('get_locale') == 'es_ES' %}Mi nombre{% else %}My name{% endif %}" type="text"></div>
+						</div>
+						<div class="form-item">
+							<div><input id="email" name="email" value="" type="email" required="required" placeholder="melhor@email.com"></div>
+						</div>
+						<div class="form-item">
+							<div><input id="telefone" name="telefone" value="" required="required" placeholder="(00) 00000-0000" class="telefone" type="text" maxlength="15"></div>
+						</div>
+						<div class="form-item">
+							<div><textarea id="mensagem" name="mensagem" required="required" placeholder="{% if fn('get_locale') == 'pt_BR' %}Mensagem{% elseif fn('get_locale') == 'es_ES' %}Mensaje{% else %}Message{% endif %}" cols="60" rows="4"></textarea></div>
+						</div>
+						<div class="form-item _tar">
+							<button type="submit" class="Button">{% if fn('get_locale') == 'pt_BR' %}Enviar{% elseif fn('get_locale') == 'es_ES' %}Enviar{% else %}Send{% endif %}</button>
+						</div>
+						<input type="hidden" name="form_action" value="form_info">
+					{{ form_info_after }}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

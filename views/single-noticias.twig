@@ -1,0 +1,44 @@
+{% extends 'base.twig' %}
+
+{% block conteudo %}
+
+	<section class="Noticias _topo wow fadeIn">
+		<div class="container">
+			<h2 class="titulo">{{ post.title }}</h2>
+			<a href="{{ site.url }}/noticias" class="link">< {% if fn('get_locale') == 'pt_BR' %}Voltar{% elseif fn('get_locale') == 'es_ES' %}Volver{% else %}Back{% endif %}</a>
+		</div>
+	</section>
+
+	<section class="Banner _alugar">
+		<div class="item wow fadeIn" style="background-image: url({{ Image(post.get_field('fotos').0.foto) }});"></div>
+	</section>
+
+	<section class="Noticias _single">
+		<div class="container wow fadeIn">
+			<div class="Row _gutters">
+				<div class="col _col-2">
+					<div class="galeria" data-component="galeria">
+					{% for key,item in post.get_field('fotos') %}
+						<a class="{% if key >= 2 %}_hide {% endif %}item" href="{{ item.foto }}" title="{{ item.legenda }}"><img src="{{ item.foto|resize(150,100) }}" alt="{{ item.legenda }}">
+							{% if key == 0 %}
+							<span>{% if fn('get_locale') == 'pt_BR' %}ver mais{% elseif fn('get_locale') == 'es_ES' %}ver más{% else %}view more{% endif %}</span>
+							{% endif %}
+						</a>
+					{% endfor %}
+					</div>
+					<div class="tags">
+						{% for term in post.terms %}
+							<div class="tag" style="background: {{ term.cor }}">{{ term.name }}</div>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="col _col-10">
+					<div class="texto">{{ post.get_field('texto') }}</div>
+					<a href="#share" data-target="#share" data-component="toggle"><i class="icon-share"></i> {% if fn('get_locale') == 'pt_BR' %}Gostou? Compartilhe agora{% elseif fn('get_locale') == 'es_ES' %}¿Te gustó? Comparte ahora{% else %}Did you like it? share now{% endif %}</a>
+					<div id="share" class="_hide">{{ social_share('all') }}</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

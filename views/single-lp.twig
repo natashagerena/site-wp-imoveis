@@ -1,0 +1,55 @@
+{% extends 'base.twig' %}
+
+{% block conteudo %}
+
+	<div class="container Landing_page">
+		{% if post.get_field('formulario') %}
+		<div class="Row _gutters _align-center">
+			<div class="col _col-6 textos">
+		{% endif %}
+
+				{% for item in post.get_field('conteudo') %}
+					{% if item.titulo %}
+						<h2 class="_upper _violet">{{ item.titulo }}</h2>
+					{% elseif item.imagem %}
+						<div class="imagem _mb30">
+							<img src="{{ Image(item.imagem)|resize(1200) }}" alt="{{ item.titulo }}">
+						</div>
+					{% elseif item.video %}
+						<div class="video_embed _mb30">
+							{{ fn('wp_oembed_get', item.video) }}
+						</div>
+					{% elseif item.link %}
+						<a href="{{ item.link }}" class="Button" target="_blank">{{ item.texto }}</a>
+					{% elseif item.texto %}
+						<div class="texto">
+							{{ item.texto }}
+						</div>
+					{% endif %}
+				{% endfor %}
+
+			{% if post.get_field('formulario') %}
+			</div>
+			<div class="col _col-6 formulario">
+
+				<h3 class="titulo _upper">{{ post.get_field('titulo_do_formulario') }}</h3>
+
+				<div class="info">
+					{{ form }}
+
+					{% if post.get_field('arquivo') %}
+						<div class="download _hide">
+							<a href="{{ post.get_field('arquivo').url }}" target="_blank">
+								<i class="icon-download"></i>
+								Download
+							</a>
+						</div>
+					{% endif %}
+				</div>
+
+			</div>
+		</div>
+		{% endif %}
+	</div>
+
+{% endblock %}

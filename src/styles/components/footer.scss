@@ -1,0 +1,114 @@
+.Footer {
+	padding: 60px 0 90px;
+	background-color: #24599A;
+	font-size: 14px;
+
+	* {
+		color: #fff;
+	}
+
+	.redes-sociais {
+		position: absolute;
+		top: 5px;
+		right: 0;
+
+		li {
+			display: inline-block; 
+			margin: 0 5px;
+
+			a {
+				display: block;
+				height: 32px;
+				width: 32px;
+				border-radius: 50%;
+				border: 1px solid rgba(255, 255, 255, 0.25);
+				line-height: 30px;
+				text-align: center;
+			}
+		}
+	}
+
+	.copy {
+		position: absolute;
+		bottom: -90px;
+		right: 0;
+		font-size: 12px;
+		text-transform: uppercase;
+	}
+
+	.container {
+		> div {
+			display: inline-block;
+			vertical-align: top;
+		}
+	}
+
+	.logo {
+		width: 33%;
+	}
+
+	.infos1 {
+		width: 22%;
+	}
+
+	.item {
+		display: block;
+		margin-bottom: 24px;
+		line-height: 1.9;
+
+		i {
+			display: inline-block;
+			vertical-align: top;
+			font-size: 20px;
+		}
+
+		span {
+			display: inline-block;
+			vertical-align: top;
+		}
+
+		a {
+			display: block;
+		}
+	}
+
+
+	@include breakpoint(0, $md) {
+		.logo {
+			width: 25%;
+		}
+
+		.infos1 {
+			width: 28%;
+		}
+	}
+
+	@include breakpoint(0, $sm) {
+		padding: 50px 0 20px;
+
+		.logo {
+			width: 100%;
+			margin-bottom: 40px;
+		}
+
+		.infos1 {
+			width: 50%;
+		}
+
+		.copy {
+			display: block !important;
+		    position: relative;
+		    bottom: 0;
+		    text-align: center;
+		}
+
+	}
+
+
+	@include breakpoint(0, $xs) {
+		.infos1 {
+			width: 100%;
+		}
+
+	}
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+
+<html lang="pt-BR">
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" 			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="format-detection" 	content="telephone=no">
+	<meta property="og:type"        content="website"/>
+	<meta property="og:title"       content="{{ post.title ? post.title ~ ' - ' }}{{ site.name }}"/>
+	<meta property="og:description" content="{% if post.get_field('meta_description') %}{{ post.get_field('meta_description') }}{% else %}{{ option('meta_description') }}{% endif %}" />
+	<meta property="og:image"       content="{% if post.get_field('imagem') %}{{ Image(post.get_field('imagem')) }}{% else %}{{ option('meta_imagem') }}{% endif %}" />
+	<meta name="description" 		content="{% if post.get_field('meta_description') %}{{ post.get_field('meta_description') }}{% else %}{{ option('meta_description') }}{% endif %}" />
+
+	{{ wp_head }}
+
+	<title>
+		{% if fn('is_post_type_archive', 'noticias') %}
+			{% if fn('get_locale') == 'pt_BR' %}Notícias{% elseif fn('get_locale') == 'es_ES' %}Noticias{% else %}News{% endif %} - {{ site.name }}
+		{% else %}
+			{{ post.title ? post.title ~ ' - ' }}{{ site.name }}
+		{% endif %}
+	</title>
+
+	<link rel="shortcut icon" href="{{ option('favicon') }}">
+
+	<style>
+		.wow {visibility: hidden;}
+		.Loader {position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: #fff;z-index: 9999;}
+		.loaded .Loader {display: none;}
+		@keyframes ldio {0% {top: 96px;left: 96px;width: 0;height: 0;opacity: 1;}100% {top: 18px;left: 18px;width: 156px;height: 156px;opacity: 0;}}
+		.ldio div {position: absolute;border-width: 4px;border-style: solid;opacity: 1;border-radius: 50%;animation: ldio 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;}
+		.ldio div:nth-child(1) {border-color: #2196F3;animation-delay: 0s;}
+		.ldio div:nth-child(2) {border-color: #24599a;animation-delay: -0.5s;}
+		.loadingio-spinner-ripple {position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);width: 200px;height: 200px;display: inline-block;overflow: hidden;background: #ffffff;}
+		.ldio {position: absolute;top: 50%;left: 50%;width: 100%;height: 100%;transform: translateZ(0) scale(0.6) translate(-50%, -50%);backface-visibility: hidden;transform-origin: 0 0;}
+		.ldio div {box-sizing: content-box;}
+	</style>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="{{ get_page_class() }}">
+	<div class="Loader"><div class="loadingio-spinner-ripple"><div class="ldio"><div></div><div></div></div></div></div>
+	<main class="animsition">
+		<header class="Header">
+			<div class="container">
+				<a href="{{ site.url }}" class="logo"><img src="{{ option('logo') }}" alt="{{ site.name }}"></a>
+				<a href="#" data-component="toggle" data-type="menu" class="toggle _show-sm">
+					<i class="icon-menu"></i>
+				</a>
+
+				<nav>
+					<ul class="menu">
+						<li><a class="{{ is_active('home') }}" href="{{ site.url }}">{{ fn('get_the_title', 2) }}</a></li>
+						<li><a class="{{ is_active('a-imoveis') }}" href="{{ site.url }}/a-imoveis">{{ fn('get_the_title', 9) }}</a></li>
+						<li><a class="{{ is_active('alugar') }}" href="{{ site.url }}/alugar">{% if fn('get_locale') == 'pt_BR' %}Alugar{% elseif fn('get_locale') == 'es_ES' %}Contratar{% else %}Hire{% endif %}</a></li>
+						<li><a class="{{ is_active('empreendimentos') }}" href="{{ site.url }}/empreendimentos">{% if fn('get_locale') == 'pt_BR' %}Empreendimentos{% elseif fn('get_locale') == 'es_ES' %}Desarrollo{% else %}Enterprise{% endif %}</a></li>
+						<li><a class="{{ is_active('noticias') }}" href="{{ site.url }}/noticias">{% if fn('get_locale') == 'pt_BR' %}Notícias{% elseif fn('get_locale') == 'es_ES' %}Noticias{% else %}News{% endif %}</a></li>
+						<li><a class="{{ is_active('servicos') }}" href="{{ site.url }}/servicos">{{ fn('get_the_title', 10) }}</a></li>
+						<li><a class="{{ is_active('contato') }}" href="{{ site.url }}/contato">{{ fn('get_the_title', 11) }}</a></li>
+					</ul>
+
+					<a class="Button _imoveis24h _show-sm" href="{{ site.url }}/imoveis24h">{{ fn('get_the_title', 12) }}</a>
+				</nav>
+
+				<a class="Button _imoveis24h _hide-sm" href="{{ site.url }}/imoveis24h">{{ fn('get_the_title', 12) }}</a>
+				<div class="langs">
+					{{ fn('qtranxf_generateLanguageSelectCode','image') }}
+				</div>	
+			</div>
+		</header>
